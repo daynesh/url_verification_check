@@ -25,7 +25,7 @@ def write_failure(outputfile, src, expected, actual, statuscode):
 
 def main():
     # Initialized variables
-    f = open('FINAL_tlc_bio_redirect.csv', 'r')
+    f = open('input.csv', 'r')
     output_failures = open('output_failures.csv', 'w')
     output_failures.write("URL to Test,Expected,Actual,Status Code")
     index = 0
