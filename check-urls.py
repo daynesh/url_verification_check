@@ -62,7 +62,7 @@ def main():
             res.close
         except HTTPError, e:
             print "Failed test!"
-            print "  Requesting URL: ", src
+            print "  Requesting URL: " + src
             print "    Response code: " + str(e.code)
             failures += 1
             write_failure(output_failures, src, original_dest, "", str(e.code))
@@ -80,12 +80,17 @@ def main():
         
         if actual != dest:
             print "Failed test!"
-            print "  Requesting URL: ", src
-            print "    Response code: " + str(res_opener.status)
+            print "  Requesting URL: " + src
             print "    Expected URL: " + dest
             print "    Actual URL: " + actual
+
+            status_code = res.getcode()
+            if hasattr(res_opener, 'status'):
+                status_code = res_opener.status
+            print "    Response code: " + str(status_code)
+
             failures += 1
-            write_failure(output_failures, src, original_dest, res_opener.url, str(res_opener.status))
+            write_failure(output_failures, src, original_dest, res_opener.url, str(status_code))
 
         print "Testing URL #" + str(index-1)
         sleep(sleep_time)
